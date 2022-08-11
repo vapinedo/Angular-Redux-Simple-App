@@ -1,7 +1,10 @@
 <div class="my-4">
   <h3 class="mb-4">Child Counter: {{ counter }}</h3>
   <button (click)="onMultiply()" class="btn btn-danger">Multiply by 2</button>
-  <button (click)="onDivide()" class="btn btn-primary mx-3">
-    Divide by 2
-  </button>
+  <button (click)="onDivide()" class="btn btn-primary mx-3">Divide by 2</button>
 </div>
+
+<div class="my-4">
+  <app-grand-child [counter]="counter" (counterChange)="onResetGranChild($event)"></app-grand-child>
+</div>
+  

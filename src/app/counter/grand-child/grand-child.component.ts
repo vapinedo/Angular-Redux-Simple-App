@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-grand-child',
@@ -6,11 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class GrandChildComponent implements OnInit {
+export class GrandChildComponent {
+  @Input() counter: number; 
+  @Output() counterChange = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() { 
+    this.counter = 0;
+  }
 
-  ngOnInit(): void {
+  onReset() {
+    this.counter = 0;
+    this.counterChange.emit(this.counter);
   }
 
 }

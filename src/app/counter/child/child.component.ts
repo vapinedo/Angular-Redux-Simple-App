@@ -22,4 +22,9 @@ export class ChildComponent {
     this.counterChange.emit(this.counter);
   }
 
+  onResetGranChild(newCounterValue: number) {
+    this.counter = newCounterValue;
+    this.counterChange.emit(this.counter);
+  }
+
 }
