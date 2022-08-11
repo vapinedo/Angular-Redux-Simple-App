@@ -1,22 +1,30 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { decrement, increment } from './counter/counter.actions';
+
+interface AppState {
+  counter: number;
+}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  counter: number;
+  counter!: number;
 
-  constructor() {
-    this.counter = 0;
+  constructor(private store: Store<AppState>) {
+    this.store.subscribe(state => {
+      this.counter = state.counter ;
+    });
   }
-
+ 
   onDecrement() {
-    this.counter = this.counter - 1;
+    this.store.dispatch(decrement());
   }
-
+  
   onIncrement() {
-    this.counter = this.counter + 1;
+    this.store.dispatch(increment());
   }
 }
