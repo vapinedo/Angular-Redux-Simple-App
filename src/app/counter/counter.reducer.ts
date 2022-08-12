@@ -1,15 +1,14 @@
-import { Action } from '@ngrx/store';
-import { decrement, increment } from './counter.actions';
+import { createReducer, on } from '@ngrx/store';
+import { decrement,  increment } from './counter.actions';
 
-export function counterReducer(state: number = 0, action: Action) {
-  switch (action.type) {
-    case decrement.type:
-      return state - 1;
+export const initialState = 0;
 
-    case increment.type:
-      return state + 1;
- 
-    default:
-      return state;
-  }
-}
+const _counterReducer = createReducer (
+  initialState,
+  on(decrement, (state) => state - 1),
+  on(increment, (state) => state + 1)
+);
+
+export function counterReducer(state: any, action: any): number {
+  return _counterReducer(state, action);  
+} 

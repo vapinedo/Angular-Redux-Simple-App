@@ -16,7 +16,7 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     this.store
-      .select('counter')
+      .select('counter') 
       .subscribe((counter) => (this.counter = counter));
   }
 
