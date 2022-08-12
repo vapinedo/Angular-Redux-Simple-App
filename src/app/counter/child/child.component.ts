@@ -1,5 +1,6 @@
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
+import * as actions from '../counter.actions';
 import { AppState } from '../counter.interface';
 
 @Component({
@@ -17,10 +18,10 @@ export class ChildComponent {
   }
 
   onMultiply() {
-    // this.counter = this.counter * 2;
-  }
-
+    this.store.dispatch(actions.multiply({ factor: 2 }));
+  } 
+ 
   onDivide() {
-    // this.counter = this.counter / 2;
+    this.store.dispatch(actions.divide({ divisor: 2 }));  
   }
 }
