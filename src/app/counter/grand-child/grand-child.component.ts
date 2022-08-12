@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { reset } from '../counter.actions';
+import { AppState } from '../counter.interface';
 
 @Component({
   selector: 'app-grand-child',
   templateUrl: './grand-child.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class GrandChildComponent {
-  @Input() counter: number; 
-  @Output() counterChange = new EventEmitter<number>();
+  counter!: number;
 
-  constructor() { 
-    this.counter = 0;
+  constructor(private store: Store<AppState>) {
+    this.store
+      .select('counter')
+      .subscribe((counter) => (this.counter = counter));
   }
 
   onReset() {
-    this.counter = 0;
-    this.counterChange.emit(this.counter);
+    this.store.dispatch(reset());
   }
-
 }
