@@ -1,30 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Component } from '@angular/core';
+import { AppState } from '../counter.interface';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ChildComponent {
-  @Input() counter!: number;
-  @Output() counterChange = new EventEmitter<number>();
+  counter!: number;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {
+    this.store
+      .select('counter')
+      .subscribe((counter) => (this.counter = counter));
+  }
 
   onMultiply() {
-    this.counter = this.counter * 2;
-    this.counterChange.emit(this.counter);
+    // this.counter = this.counter * 2;
   }
 
   onDivide() {
-    this.counter = this.counter / 2;
-    this.counterChange.emit(this.counter);
+    // this.counter = this.counter / 2;
   }
-
-  onResetGranChild(newCounterValue: number) {
-    this.counter = newCounterValue;
-    this.counterChange.emit(this.counter);
-  }
-
 }
